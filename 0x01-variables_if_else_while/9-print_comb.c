@@ -7,7 +7,7 @@
  */
 int main(void)
 {
-    int i;
+	int i;
 
     for (i = 0; i < 9; i++)
     {
@@ -19,8 +19,7 @@ int main(void)
             putchar(' '); /* Print the space */
         }
     }
-
-    putchar('\n'); /* Print a newline character */
+ putchar('\n'); /* Print a newline character */
 
     return 0;
 }
