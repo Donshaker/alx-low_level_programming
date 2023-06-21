@@ -1,5 +1,11 @@
 #include "main.h"
 
+/**
+ * main -Entry point of my code,
+ *
+ * Return:n: Always 0
+ */
+
 int main(void)
 {
     _putchar('_');
