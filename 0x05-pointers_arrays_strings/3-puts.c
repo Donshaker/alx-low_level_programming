@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * print_string - Prints a string followed by a new line
+ * puts - Prints a string followed by a new line, to stdout
  * @str: The string to be printed
  */
-void print_string(const char *str)
+void _puts(char *str)
 {
 int i = 0;
 
