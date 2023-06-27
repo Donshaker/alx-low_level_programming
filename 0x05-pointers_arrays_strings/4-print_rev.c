@@ -1,18 +1,19 @@
 #include "main.h"
 
 /**
- * print_string - Prints a string followed by a new line
- * @str: The string to be printed
+ * print_reverse - Prints a string in reverse, followed by a new line.
+ * @str: The string to be printed.
  */
-void print_string(const char *str)
+void print_reverse(char *str)
 {
-int i = 0;
+    int length = 0;
 
-while (str[i] != '\0')
-{
-_putchar(str[i]);
-i++;
-}
-_putchar('\n');
+    while (str[length] != '\0')
+        length++;
+
+    for (length -= 1; length >= 0; length--)
+        _putchar(str[length]);
+
+    _putchar('\n');
 }
 
