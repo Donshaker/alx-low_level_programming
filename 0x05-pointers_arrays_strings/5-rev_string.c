@@ -13,7 +13,7 @@ char temp;
 while (str[length] != '\0')
 length++;
 
- ength--;
+length--;
 
 while (start < length)
     {
