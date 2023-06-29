@@ -18,7 +18,7 @@ ptr++;
 
 /* Append characters from the source string to the destination string */
 while (*src && n > 0)
-(    
+{
 *ptr = *src;
 ptr++;
 src++;
@@ -30,4 +30,5 @@ n--;
 
 return dest;
 }
+
 
