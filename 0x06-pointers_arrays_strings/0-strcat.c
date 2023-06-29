@@ -9,23 +9,23 @@
  */
 char *_strcat(char *dest, char *src)
 {
-    char *ptr = dest;
+char *ptr = dest;
 
-    /* Find the end of the destination string */
-    while (*ptr)
-        ptr++;
+/* Find the end of the destination string */
+while (*ptr)
+ptr++;
 
-    /* Append characters from the source string to the destination string */
-    while (*src)
-    {
-        *ptr = *src;
-        ptr++;
-        src++;
-    }
+/* Append characters from the source string to the destination string */
+while (*src)
+{
+*ptr = *src;
+ptr++;
+src++;
+}
 
-    /* Add a terminating null byte */
-    *ptr = '\0';
+/* Add a terminating null byte */
+*ptr = '\0';
 
-    return (dest);
+return (dest);
 }
 
