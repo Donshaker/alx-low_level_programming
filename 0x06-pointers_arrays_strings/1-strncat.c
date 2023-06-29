@@ -10,24 +10,24 @@
  */
 char *_strncat(char *dest, char *src, int n)
 {
-    char *ptr = dest;
+char *ptr = dest;
 
-    /* Find the end of the destination string */
-    while (*ptr)
-        ptr++;
+/* Find the end of the destination string */
+while (*ptr)
+ptr++;
 
-    /* Append characters from the source string to the destination string */
-    while (*src && n > 0)
-    {
-        *ptr = *src;
-        ptr++;
-        src++;
-        n--;
-    }
+/* Append characters from the source string to the destination string */
+while (*src && n > 0)
+(    
+*ptr = *src;
+ptr++;
+src++;
+n--;
+}
 
-    /* Add a terminating null byte */
-    *ptr = '\0';
+/* Add a terminating null byte */
+*ptr = '\0';
 
-    return dest;
+return dest;
 }
 
