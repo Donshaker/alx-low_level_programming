@@ -8,29 +8,25 @@
  */
 int is_palindrome(char *s)
 {
-    int len = _strlen_recursion(s);
+    int len = 0;
+    int i;
 
-    if (len <= 1)  /* Base case: empty string or single character is a palindrome */
-        return 1;
+    /* Find the length of the string */
+    while (s[len] != '\0')
+        len++;
 
-    return is_palindrome_helper(s, s + len - 1);
+    /* Check if the string is empty */
+    if (len == 0)
+        return (1);
+
+    /* Compare characters from both ends */
+    for (i = 0; i < len / 2; i++)
+    {
+        if (s[i] != s[len - 1 - i])
+            return (0);
+    }
+
+    return (1);
 }
 
-/**
- * is_palindrome_helper - Recursive helper function to check if a string is a palindrome
- * @start: The starting character of the substring to check
- * @end: The ending character of the substring to check
- *
- * Return: 1 if the string is a palindrome, 0 otherwise
- */
-int is_palindrome_helper(char *start, char *end)
-{
-    if (start >= end)  /* Base case: substring is a palindrome */
-        return 1;
-
-    if (*start != *end)  /* Base case: substring is not a palindrome */
-        return 0;
-
-    return is_palindrome_helper(start + 1, end - 1);
-}
 
