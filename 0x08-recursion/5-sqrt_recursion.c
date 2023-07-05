@@ -11,7 +11,7 @@ int _sqrt_recursion(int n)
 if (n < 0)  /* Error case: n is negative */
 return -1;
 
-return sqrt_helper(n, 0, n);
+return sqrt_helper(0);
 }
 
 /**
