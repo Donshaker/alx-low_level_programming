@@ -14,6 +14,6 @@ return (-1);
 if (n == 0)  /* Base case: factorial of 0 is 1 */
 return (1);
 
-return n * factorial(n - 1);  /* Recursively calculate factorial */
+return (n) * factorial(n - 1);  /* Recursively calculate factorial */
 }
 
