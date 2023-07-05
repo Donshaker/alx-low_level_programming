@@ -8,25 +8,25 @@
  */
 int is_palindrome(char *s)
 {
-    int len = 0;
-    int i;
+int len = 0;
+int i;
 
-    /* Find the length of the string */
-    while (s[len] != '\0')
-        len++;
+/* Find the length of the string */
+while (s[len] != '\0')
+len++;
 
-    /* Check if the string is empty */
-    if (len == 0)
-        return (1);
+/* Check if the string is empty */
+if (len == 0)
+return (1);
 
-    /* Compare characters from both ends */
-    for (i = 0; i < len / 2; i++)
-    {
-        if (s[i] != s[len - 1 - i])
-            return (0);
-    }
+/* Compare characters from both ends */
+for (i = 0; i < len / 2; i++)
+{
+if (s[i] != s[len - 1 - i])
+return (0);
+}
 
-    return (1);
+return (1);
 }
 
 
