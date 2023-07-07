@@ -1,28 +1,19 @@
 #include "main.h"
+#include <stdio.h>
 
+/**
+ * main - Entry point
+ * @argc: The number of command-line arguments
+ * @argv: An array containing the command-line arguments
+ *
+ * Return: Always 0
+ */
 int main(int argc, char *argv[])
 {
-    (void)argc; /* Unused parameter */
+	(void)argc; /* unused parameter */
 
-    print_program_name(argv);
+	printf("%s\n", argv[0]);
 
-    return 0;
-}
-
-void print_program_name(char *argv[])
-{
-    int i = 0;
-
-    while (argv[0][i] != '\0')
-    {
-        _putchar(argv[0][i]);
-        i++;
-    }
-    _putchar('\n');
-}
-
-int _putchar(char c)
-{
-    return putchar(c);
+	return 0;
 }
 
