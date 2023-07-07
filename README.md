@@ -1,1 +1,1 @@
-0x07-pointers_arrays_strings
+0x0A. C - argc, argv
