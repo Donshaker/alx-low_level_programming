@@ -1,7 +1,7 @@
 #include "main.h"
 #include <stdlib.h>
 
-char *argstostr(int ac, char **av)
+char **argstostr(int ac, char **av)
 {
     if (ac == 0 || av == NULL)
         return NULL;
@@ -9,7 +9,7 @@ char *argstostr(int ac, char **av)
     int total_length = 0;
     int i, j, k;
 
-    // Calculate the total length of the arguments
+    /* Calculate the total length of the arguments */
     for (i = 0; i < ac; i++)
     {
         j = 0;
@@ -18,30 +18,38 @@ char *argstostr(int ac, char **av)
             total_length++;
             j++;
         }
-        total_length++; // Account for the newline character
+        total_length++; /* Account for the newline character */
     }
 
-    // Allocate memory for the concatenated string
-    char *result = malloc((total_length + 1) * sizeof(char));
+    /* Allocate memory for the concatenated string */
+    char **result = malloc((ac + 1) * sizeof(char *));
     if (result == NULL)
         return NULL;
 
-    // Copy the arguments to the concatenated string
-    k = 0;
     for (i = 0; i < ac; i++)
     {
-        j = 0;
-        while (av[i][j] != '\0')
+        result[i] = malloc((total_length + 1) * sizeof(char));
+        if (result[i] == NULL)
         {
-            result[k] = av[i][j];
-            j++;
+            /* Free previously allocated memory */
+            for (k = 0; k < i; k++)
+                free(result[k]);
+            free(result);
+            return NULL;
+        }
+
+        /* Copy the arguments to the concatenated string */
+        k = 0;
+        for (j = 0; av[i][j] != '\0'; j++)
+        {
+            result[i][k] = av[i][j];
             k++;
         }
-        result[k] = '\n'; // Append newline character
-        k++;
+        result[i][k] = '\n'; /* Append newline character */
+        result[i][k + 1] = '\0'; /* Null-terminate the string */
     }
 
-    result[k] = '\0'; // Null-terminate the concatenated string
+    result[ac] = NULL; /* Null-terminate the array of strings */
 
     return result;
 }
