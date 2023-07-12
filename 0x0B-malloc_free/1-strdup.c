@@ -6,14 +6,13 @@ char *_strdup(char *str)
     if (str == NULL)
         return NULL;
 
-    char *duplicate;
     unsigned int length = 0;
 
     // Calculate the length of the string
     while (str[length] != '\0')
         length++;
 
-    duplicate = malloc((length + 1) * sizeof(char));
+    char *duplicate = malloc((length + 1) * sizeof(char));
     if (duplicate == NULL)
         return NULL;
 
@@ -22,5 +21,6 @@ char *_strdup(char *str)
         duplicate[i] = str[i];
 
     return duplicate;
+}
 }
 
