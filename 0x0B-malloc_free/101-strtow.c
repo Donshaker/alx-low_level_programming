@@ -31,9 +31,10 @@ static int count_words(char *str)
 static char *extract_word(char *str, int start, int end)
 {
 	int i, j;
+	int word_length = end - start + 1;
 	char *word;
 
-	word = malloc((end - start + 2) * sizeof(char));
+	word = malloc((word_length + 1) * sizeof(char));
 	if (word == NULL)
 		return NULL;
 
@@ -54,7 +55,8 @@ static char *extract_word(char *str, int start, int end)
  */
 char **strtow(char *str)
 {
-	int i, j, num_words, word_index;
+	int i, j;
+	int num_words, word_index;
 	char **words;
 
 	if (str == NULL || *str == '\0')
