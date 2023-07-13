@@ -1,56 +1,46 @@
 #include "main.h"
-#include <stdlib.h>
 
-char **argstostr(int ac, char **av)
+/**
+ * argstostr - Concatenates all the arguments of the program.
+ * @ac: The argument count.
+ * @av: An array of strings containing the arguments.
+ *
+ * Return: A pointer to a new string, or NULL if it fails.
+ *         Each argument is followed by a '\n' in the new string.
+ */
+char *argstostr(int ac, char **av)
 {
-    if (ac == 0 || av == NULL)
-        return NULL;
+	int i, j, total_length = 0;
+	char *result;
+	int k = 0;
 
-    int total_length = 0;
-    int i, j, k;
+	if (ac == 0 || av == NULL)
+		return (NULL);
 
-    /* Calculate the total length of the arguments */
-    for (i = 0; i < ac; i++)
-    {
-        j = 0;
-        while (av[i][j] != '\0')
-        {
-            total_length++;
-            j++;
-        }
-        total_length++; /* Account for the newline character */
-    }
+	for (i = 0; i < ac; i++)
+	{
+		for (j = 0; av[i][j] != '\0'; j++)
+			total_length++;
+		total_length++; /* Account for '\n' after each argument */
+	}
 
-    /* Allocate memory for the concatenated string */
-    char **result = malloc((ac + 1) * sizeof(char *));
-    if (result == NULL)
-        return NULL;
+	result = malloc((total_length + 1) * sizeof(char));
+	if (result == NULL)
+		return (NULL);
 
-    for (i = 0; i < ac; i++)
-    {
-        result[i] = malloc((total_length + 1) * sizeof(char));
-        if (result[i] == NULL)
-        {
-            /* Free previously allocated memory */
-            for (k = 0; k < i; k++)
-                free(result[k]);
-            free(result);
-            return NULL;
-        }
+	for (i = 0; i < ac; i++)
+	{
+		for (j = 0; av[i][j] != '\0'; j++)
+		{
+			result[k] = av[i][j];
+			k++;
+		}
+		result[k] = '\n';
+		k++;
+	}
 
-        /* Copy the arguments to the concatenated string */
-        k = 0;
-        for (j = 0; av[i][j] != '\0'; j++)
-        {
-            result[i][k] = av[i][j];
-            k++;
-        }
-        result[i][k] = '\n'; /* Append newline character */
-        result[i][k + 1] = '\0'; /* Null-terminate the string */
-    }
+	result[k] = '\0';
 
-    result[ac] = NULL; /* Null-terminate the array of strings */
-
-    return result;
+	return (result);
 }
 
