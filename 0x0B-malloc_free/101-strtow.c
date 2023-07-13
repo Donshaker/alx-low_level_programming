@@ -1,104 +1,110 @@
 #include "main.h"
+#include <stdio.h>
 #include <stdlib.h>
 
-int count_words(char *str);
-char *extract_word(char *str, int *index);
-void free_words(char **words);
 
+/**
+ * count_words - Counts the number of words in a string
+ * @str: The input string
+ *
+ * Return: The number of words
+ */
+static int count_words(char *str)
+{
+	int i, count = 0;
+
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		if (str[i] != ' ' && (str[i + 1] == ' ' || str[i + 1] == '\0'))
+			count++;
+	}
+
+	return count;
+}
+
+/**
+ * extract_word - Extracts a word from a string
+ * @str: The input string
+ * @start: The starting index of the word
+ * @end: The ending index of the word
+ *
+ * Return: The extracted word
+ */
+static char *extract_word(char *str, int start, int end)
+{
+	int i, j;
+	char *word;
+
+	word = malloc((end - start + 2) * sizeof(char));
+	if (word == NULL)
+		return NULL;
+
+	for (i = start, j = 0; i <= end; i++, j++)
+		word[j] = str[i];
+	word[j] = '\0';
+
+	return word;
+}
+
+/**
+ * strtow - Splits a string into words
+ * @str: The input string
+ *
+ * Return: Pointer to an array of strings (words)
+ *         The last element of the array is NULL
+ *         NULL if str is NULL or str is ""
+ */
 char **strtow(char *str)
 {
-    if (str == NULL || *str == '\0')
-        return NULL;
+	int i, j, word_index = 0, num_words = 0;
+	char **words;
 
-    int num_words = count_words(str);
-    if (num_words == 0)
-        return NULL;
+	if (str == NULL || *str == '\0')
+		return NULL;
 
-    char **words = malloc((num_words + 1) * sizeof(char *));
-    if (words == NULL)
-        return NULL;
+	num_words = count_words(str);
+	words = malloc((num_words + 1) * sizeof(char *));
+	if (words == NULL)
+		return NULL;
 
-    int word_index = 0;
-    int i = 0;
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		if (str[i] != ' ')
+		{
+			int start = i;
 
-    while (str[i] != '\0')
-    {
-        if (str[i] != ' ')
-        {
-            words[word_index] = extract_word(str, &i);
-            if (words[word_index] == NULL)
-            {
-                free_words(words);
-                return NULL;
-            }
+			while (str[i] != ' ' && str[i] != '\0')
+				i++;
 
-            word_index++;
-        }
-        else
-        {
-            i++;
-        }
-    }
+			words[word_index] = extract_word(str, start, i - 1);
+			if (words[word_index] == NULL)
+			{
+				free_words(words);
+				return NULL;
+			}
 
-    words[word_index] = NULL;
+			word_index++;
+		}
+	}
 
-    return words;
+	words[word_index] = NULL;
+	return words;
 }
 
-int count_words(char *str)
-{
-    int count = 0;
-    int i = 0;
-
-    while (str[i] != '\0')
-    {
-        if (str[i] != ' ')
-        {
-            count++;
-            while (str[i] != ' ' && str[i] != '\0')
-                i++;
-        }
-        else
-        {
-            i++;
-        }
-    }
-
-    return count;
-}
-
-char *extract_word(char *str, int *index)
-{
-    int start = *index;
-    while (str[*index] != ' ' && str[*index] != '\0')
-        (*index)++;
-
-    int word_length = *index - start;
-    char *word = malloc((word_length + 1) * sizeof(char));
-    if (word == NULL)
-        return NULL;
-
-    int i, j;
-    for (i = start, j = 0; i < *index; i++, j++)
-        word[j] = str[i];
-
-    word[j] = '\0';
-
-    return word;
-}
-
+/**
+ * free_words - Frees the memory allocated for an array of words
+ * @words: The array of words
+ */
 void free_words(char **words)
 {
-    if (words == NULL)
-        return;
+	int i;
 
-    int i = 0;
-    while (words[i] != NULL)
-    {
-        free(words[i]);
-        i++;
-    }
+	if (words == NULL)
+		return;
 
-    free(words);
+	for (i = 0; words[i] != NULL; i++)
+		free(words[i]);
+
+	free(words);
 }
 
