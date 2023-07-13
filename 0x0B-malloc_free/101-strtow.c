@@ -11,11 +11,11 @@ char **strtow(char *str)
         return NULL;
 
     int num_words = count_words(str);
+    int word_index = 0;
     char **words = malloc((num_words + 1) * sizeof(char *));
     if (words == NULL)
         return NULL;
 
-    int word_index = 0;
     int i = 0;
     while (str[i] != '\0')
     {
@@ -58,7 +58,6 @@ int count_words(char *str)
 
 char *extract_word(char *str, int *index)
 {
-    int start = *index;
     int word_length = 0;
     while (str[*index] != ' ' && str[*index] != '\0')
     {
@@ -71,8 +70,8 @@ char *extract_word(char *str, int *index)
         return NULL;
 
     int i;
-    for (i = start; i < *index; i++)
-        word[i - start] = str[i];
+    for (i = *index - word_length, word_length = 0; i < *index; i++, word_length++)
+        word[word_length] = str[i];
 
     word[word_length] = '\0';
     return word;
