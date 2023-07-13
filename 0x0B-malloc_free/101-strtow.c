@@ -1,5 +1,5 @@
-#include <stdlib.h>
 #include "main.h"
+#include <stdlib.h>
 
 int count_words(char *str);
 char *extract_word(char *str, int *index);
@@ -70,9 +70,9 @@ char *extract_word(char *str, int *index)
     if (word == NULL)
         return NULL;
 
-    int i, j;
-    for (i = start, j = 0; i < *index; i++, j++)
-        word[j] = str[i];
+    int i;
+    for (i = start; i < *index; i++)
+        word[i - start] = str[i];
 
     word[word_length] = '\0';
     return word;
