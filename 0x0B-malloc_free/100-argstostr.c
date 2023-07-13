@@ -1,4 +1,6 @@
 #include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
  * argstostr - Concatenates all the arguments of the program.
@@ -8,7 +10,7 @@
  * Return: A pointer to a new string, or NULL if it fails.
  *         Each argument is followed by a '\n' in the new string.
  */
-char *argstostr(int ac, char **av)
+char *argstostr(int ac, char *av[])
 {
 	int i, j, total_length = 0;
 	char *result;
