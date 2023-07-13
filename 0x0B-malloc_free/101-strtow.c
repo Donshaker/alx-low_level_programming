@@ -1,7 +1,5 @@
-#include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
-
+#include "main.h"
 
 /**
  * count_words - Counts the number of words in a string
@@ -56,7 +54,7 @@ static char *extract_word(char *str, int start, int end)
  */
 char **strtow(char *str)
 {
-	int i, j, word_index = 0, num_words = 0;
+	int i, j, num_words, word_index;
 	char **words;
 
 	if (str == NULL || *str == '\0')
@@ -67,6 +65,7 @@ char **strtow(char *str)
 	if (words == NULL)
 		return NULL;
 
+	word_index = 0;
 	for (i = 0; str[i] != '\0'; i++)
 	{
 		if (str[i] != ' ')
