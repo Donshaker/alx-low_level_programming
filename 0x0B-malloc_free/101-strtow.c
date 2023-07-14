@@ -8,13 +8,13 @@ void free_words(char **words);
 char **strtow(char *str)
 {
     if (str == NULL || *str == '\0')
-        return NULL;
+        return (NULL);
 
     int num_words = count_words(str);
     int word_index = 0;
     char **words = malloc((num_words + 1) * sizeof(char *));
     if (words == NULL)
-        return NULL;
+        return (NULL);
 
     int i = 0;
     while (str[i] != '\0')
@@ -31,7 +31,7 @@ char **strtow(char *str)
             else
             {
                 free_words(words);
-                return NULL;
+                return (NULL);
             }
         }
         else
@@ -40,7 +40,7 @@ char **strtow(char *str)
         }
     }
     words[word_index] = NULL;
-    return words;
+    return (words);
 }
 
 int count_words(char *str)
@@ -53,7 +53,7 @@ int count_words(char *str)
             count++;
         i++;
     }
-    return count;
+    return (count);
 }
 
 char *extract_word(char *str, int *index)
@@ -67,14 +67,14 @@ char *extract_word(char *str, int *index)
 
     char *word = malloc((word_length + 1) * sizeof(char));
     if (word == NULL)
-        return NULL;
+        return (NULL);
 
     int i;
     for (i = *index - word_length, word_length = 0; i < *index; i++, word_length++)
         word[word_length] = str[i];
 
     word[word_length] = '\0';
-    return word;
+    return (word);
 }
 
 void free_words(char **words)
