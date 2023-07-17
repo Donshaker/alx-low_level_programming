@@ -1,13 +1,8 @@
-#include <stdio.h>
-#include "mymacros.h"
+#ifndef MYHEADER_H
+#define MYHEADER_H
 
-int main(void)
-{
-    int num = -5;
-    int absNum = ABS(num);
+#define ABS(x) (((x) < 0) ? -(x) : (x))
 
-    printf("The absolute value of %d is %d\n", num, absNum);
-    return 0;
-}
+#endif /* MYHEADER_H */
 
 
