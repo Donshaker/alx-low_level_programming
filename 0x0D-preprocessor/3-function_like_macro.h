@@ -1,6 +1,5 @@
 #include <stdio.h>
-
-#define ABS(x) ((x) < 0 ? -(x) : (x))
+#include "mymacros.h"
 
 int main(void)
 {
@@ -8,7 +7,7 @@ int main(void)
     int absNum = ABS(num);
 
     printf("The absolute value of %d is %d\n", num, absNum);
-
-    return (0);
+    return 0;
 }
+
 
