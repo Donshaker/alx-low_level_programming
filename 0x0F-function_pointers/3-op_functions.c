@@ -1,82 +1,62 @@
 #include "3-calc.h"
 
 /**
- * op_add - Returns the sum of a and b
- * @a: The first integer operand
- * @b: The second integer operand
+ * add - Addition operation
+ * @a: First operand
+ * @b: Second operand
  *
- * Return: The sum of a and b
+ * Return: Result of the addition
  */
-int op_add(int a, int b)
+int add(int a, int b)
 {
-    return a + b;
+    return (a + b);
 }
 
 /**
- * op_sub - Returns the difference of a and b
- * @a: The first integer operand
- * @b: The second integer operand
+ * sub - Subtraction operation
+ * @a: First operand
+ * @b: Second operand
  *
- * Return: The difference of a and b
+ * Return: Result of the subtraction
  */
-int op_sub(int a, int b)
+int sub(int a, int b)
 {
-    return a - b;
+    return (a - b);
 }
 
 /**
- * op_mul - Returns the product of a and b
- * @a: The first integer operand
- * @b: The second integer operand
+ * mul - Multiplication operation
+ * @a: First operand
+ * @b: Second operand
  *
- * Return: The product of a and b
+ * Return: Result of the multiplication
  */
-int op_mul(int a, int b)
+int mul(int a, int b)
 {
-    return a * b;
+    return (a * b);
 }
 
 /**
- * op_div - Returns the result of the division of a by b
- * @a: The first integer operand
- * @b: The second integer operand
+ * div_op - Division operation
+ * @a: First operand
+ * @b: Second operand
  *
- * Return: The result of the division of a by b
+ * Return: Result of the division
  */
-int op_div(int a, int b)
+int div_op(int a, int b)
 {
-    if (b == 0)
-    {
-        _putchar('E');
-        _putchar('r');
-        _putchar('r');
-        _putchar('o');
-        _putchar('r');
-        _putchar('\n');
-        exit(100);
-    }
-    return a / b;
+    return (a / b);
 }
 
 /**
- * op_mod - Returns the remainder of the division of a by b
- * @a: The first integer operand
- * @b: The second integer operand
+ * mod - Modulo operation
+ * @a: First operand
+ * @b: Second operand
  *
- * Return: The remainder of the division of a by b
+ * Return: Result of the modulo operation
  */
-int op_mod(int a, int b)
+int mod(int a, int b)
 {
-    if (b == 0)
-    {
-        _putchar('E');
-        _putchar('r');
-        _putchar('r');
-        _putchar('o');
-        _putchar('r');
-        _putchar('\n');
-        exit(100);
-    }
-    return a % b;
+    return (a % b);
 }
 
