@@ -1,5 +1,7 @@
 #ifndef _3_CALC_H_
 #define _3_CALC_H_
+#include <stdlib.h>
+
 
 /* Structure to hold operator and function mappings */
 typedef struct op
