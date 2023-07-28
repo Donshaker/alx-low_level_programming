@@ -1,24 +1,18 @@
 #include <stdio.h>
 
-/* Function prototype for the constructor */
-void print_message(void) __attribute__((constructor));
+void __attribute__((constructor)) before_main(void);
 
 /**
- * print_message - Function to be executed before main function.
+ * before_main - Function to be executed before the main function.
  *
  * Description: This function prints the specified message before
  * the main function is executed.
  */
-void print_message(void)
+void before_main(void)
 {
-    printf("You're beat! and yet, you must allow,\n"
-           "I bore my house upon my back!\n");
+	printf("You're beat! and yet, you must allow,\n"
+	       "I bore my house upon my back!\n"
+	       "(A tortoise, having pretty good sense of a hare's nature, challenges one to a race.)\n");
 }
 
-int main(void)
-{
-    /* Add test code or the rest of your program here */
-
-    return (0);
-}
 
