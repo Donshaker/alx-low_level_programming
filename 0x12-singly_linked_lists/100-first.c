@@ -1,22 +1,18 @@
 #include <stdio.h>
-
-void print_before_main(void) __attribute__((constructor));
+#include "lists.h"
 
 /**
- * print_before_main - Prints the specified lines before the main function.
+ * before_main - Function to be executed before main function.
+ *
+ * Description: This function prints the specified message before
+ * the main function is executed.
  */
-void print_before_main(void)
+void before_main(void)
 {
     printf("You're beat! and yet, you must allow,\n"
            "I bore my house upon my back!\n");
 }
 
-int main(void)
-{
-    /* Your main function code goes here */
-
-    return (0);
-}
 
 
 
