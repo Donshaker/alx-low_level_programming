@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "lists.h"
 
 /* Function prototype for the constructor */
 void print_message(void) __attribute__((constructor));
@@ -20,6 +19,6 @@ int main(void)
 {
     /* Add test code or the rest of your program here */
 
-    return 0;
+    return (0);
 }
 
