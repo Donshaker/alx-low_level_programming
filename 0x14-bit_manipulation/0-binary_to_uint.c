@@ -14,14 +14,18 @@ unsigned int binary_to_uint(const char *b)
 	if (b == NULL)
 		return (0);
 
-	/* Check for valid binary characters */
 	while (*b)
 	{
-		if (*b != '0' && *b != '1')
+		if (*b == '0' || *b == '1')
+		{
+			result = (result << 1) + (*b - '0');
+			b++;
+		}
+		else
+		{
+			/* Invalid character found, return 0 */
 			return (0);
-
-		result = (result << 1) | (*b - '0'); /* Use bitwise OR */
-		b++;
+		}
 	}
 
 	return (result);
