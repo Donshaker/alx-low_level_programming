@@ -6,14 +6,16 @@
  */
 void print_binary(unsigned long int n)
 {
+	int shift, leading_zeroes;
+
 	if (n == 0)
 	{
 		_putchar('0');
 		return;
 	}
 
-	int shift = sizeof(unsigned long int) * 8 - 1;
-	int leading_zeroes = 1;
+	shift = sizeof(unsigned long int) * 8 - 1;
+	leading_zeroes = 1;
 
 	while (shift >= 0)
 	{
