@@ -6,28 +6,25 @@
  */
 void print_binary(unsigned long int n)
 {
-	int shift, leading_zeroes;
+	unsigned long int mask = 1UL << (sizeof(unsigned long int) * 8 - 1);
+	int leading_zeroes = 1;
 
-	if (n == 0)
+	while (mask)
 	{
-		_putchar('0');
-		return;
-	}
-
-	shift = sizeof(unsigned long int) * 8 - 1;
-	leading_zeroes = 1;
-
-	while (shift >= 0)
-	{
-		unsigned long int bit = (n >> shift) & 1;
-
-		if (bit == 1)
+		if (n & mask)
+		{
+			_putchar('1');
 			leading_zeroes = 0;
+		}
+		else if (!leading_zeroes)
+		{
+			_putchar('0');
+		}
 
-		if (!leading_zeroes)
-			_putchar(bit + '0');
-
-		shift--;
+		mask >>= 1;
 	}
+
+	if (leading_zeroes)
+		_putchar('0');
 }
 
