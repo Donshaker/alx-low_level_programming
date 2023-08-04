@@ -13,18 +13,18 @@ void print_binary(unsigned long int n)
 	{
 		if (n & mask)
 		{
-			_putchar('1');
+			putchar('1');
 			leading_zeroes = 0;
 		}
 		else if (!leading_zeroes)
 		{
-			_putchar('0');
+			putchar('0');
 		}
 
 		mask >>= 1;
 	}
 
 	if (leading_zeroes)
-		_putchar('0');
+		putchar('0');
 }
 
