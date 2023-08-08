@@ -110,5 +110,10 @@ int main(int argc, char *argv[])
     {
         dprintf(STDERR_FILENO, "Error: File '%s' is not an ELF file\n", argv[1]);
         close(fd);
-        return
+        return (98);
+    }
+    print_elf_header(&header);
+    close(fd);
+    return (0);
+}
 
