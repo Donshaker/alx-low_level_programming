@@ -1,3 +1,10 @@
+#include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <elf.h>
+
 /**
  * main - Displays the ELF header information of a file.
  * @argc: The number of arguments.
@@ -13,21 +20,21 @@ int main(int argc, char *argv[])
     if (argc != 2)
     {
         dprintf(STDERR_FILENO, "Usage: %s elf_filename\n", argv[0]);
-        return (98);
+        return (EXIT_FAILURE);
     }
 
     fd = open(argv[1], O_RDONLY);
     if (fd == -1)
     {
         dprintf(STDERR_FILENO, "Error: Cannot open file '%s'\n", argv[1]);
-        return (98);
+        return (EXIT_FAILURE);
     }
 
     if (read(fd, &header, sizeof(header)) != sizeof(header))
     {
         dprintf(STDERR_FILENO, "Error: Cannot read ELF header from '%s'\n", argv[1]);
         close(fd);
-        return (98);
+        return (EXIT_FAILURE);
     }
 
     if (header.e_ident[EI_MAG0] != ELFMAG0 ||
@@ -37,7 +44,7 @@ int main(int argc, char *argv[])
     {
         dprintf(STDERR_FILENO, "Error: File '%s' is not an ELF file\n", argv[1]);
         close(fd);
-        return (98);
+        return (EXIT_FAILURE);
     }
 
     printf("Magic:   ");
@@ -45,27 +52,25 @@ int main(int argc, char *argv[])
         printf("%02x ", header.e_ident[i]);
     printf("\n");
 
-    printf("Class:                             ");
-    switch (header.e_ident[EI_CLASS])
-    {
-        case ELFCLASSNONE: printf("None\n"); break;
-        case ELFCLASS32:   printf("ELF32\n"); break;
-        case ELFCLASS64:   printf("ELF64\n"); break;
-        default:           printf("<unknown>\n"); break;
-    }
+    printf("Class:   ");
+    if (header.e_ident[EI_CLASS] == ELFCLASS32)
+        printf("ELF32\n");
+    else if (header.e_ident[EI_CLASS] == ELFCLASS64)
+        printf("ELF64\n");
+    else
+        printf("Invalid ELF class\n");
 
-    printf("Data:                              ");
-    switch (header.e_ident[EI_DATA])
-    {
-        case ELFDATANONE: printf("None\n"); break;
-        case ELFDATA2LSB: printf("2's complement, little-endian\n"); break;
-        case ELFDATA2MSB: printf("2's complement, big-endian\n"); break;
-        default:          printf("<unknown>\n"); break;
-    }
+    printf("Data:    ");
+    if (header.e_ident[EI_DATA] == ELFDATA2LSB)
+        printf("2's complement, little-endian\n");
+    else if (header.e_ident[EI_DATA] == ELFDATA2MSB)
+        printf("2's complement, big-endian\n");
+    else
+        printf("Invalid ELF data encoding\n");
 
-    printf("Version:                           %d\n", header.e_ident[EI_VERSION]);
+    printf("Version: %d\n", header.e_ident[EI_VERSION]);
 
-    printf("OS/ABI:                            ");
+    printf("OS/ABI:  ");
     switch (header.e_ident[EI_OSABI])
     {
         case ELFOSABI_NONE:        printf("UNIX System V ABI\n"); break;
@@ -79,12 +84,12 @@ int main(int argc, char *argv[])
         case ELFOSABI_TRU64:       printf("TRU64 UNIX\n"); break;
         case ELFOSABI_MODESTO:     printf("Modesto\n"); break;
         case ELFOSABI_OPENBSD:     printf("OpenBSD\n"); break;
-        default:                   printf("<unknown>\n"); break;
+        default:                   printf("Unknown OS/ABI\n"); break;
     }
 
-    printf("ABI Version:                       %d\n", header.e_ident[EI_ABIVERSION]);
+    printf("ABI Version: %d\n", header.e_ident[EI_ABIVERSION]);
 
-    printf("Type:                              ");
+    printf("Type:    ");
     switch (header.e_type)
     {
         case ET_NONE:   printf("NONE (None)\n"); break;
@@ -92,13 +97,13 @@ int main(int argc, char *argv[])
         case ET_EXEC:   printf("EXEC (Executable file)\n"); break;
         case ET_DYN:    printf("DYN (Shared object file)\n"); break;
         case ET_CORE:   printf("CORE (Core file)\n"); break;
-        default:        printf("<unknown>\n"); break;
+        default:        printf("Unknown type\n"); break;
     }
 
-    printf("Entry point address:               %#lx\n", (unsigned long)header.e_entry);
+    printf("Entry point address:   %#lx\n", (unsigned long)header.e_entry);
 
     close(fd);
-    return (0);
+    return (EXIT_SUCCESS);
 }
 }
 
