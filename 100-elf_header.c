@@ -7,8 +7,9 @@
 #include <elf.h>
 
 void print_elf_header_info(Elf64_Ehdr *header) {
+    int i;
     printf("Magic: ");
-    for (int i = 0; i < EI_NIDENT; i++) {
+    for (i = 0; i < EI_NIDENT; i++) {
         printf("%02x ", header->e_ident[i]);
     }
     printf("\n");
@@ -39,32 +40,32 @@ void print_elf_header_info(Elf64_Ehdr *header) {
 int main(int argc, char *argv[]) {
     if (argc != 2) {
         fprintf(stderr, "Usage: %s elf_filename\n", argv[0]);
-        return (98);
+        return 98;
     }
 
     const char *elf_filename = argv[1];
     int fd = open(elf_filename, O_RDONLY);
     if (fd == -1) {
         perror("Error opening file");
-        return (98);
+        return 98;
     }
 
     Elf64_Ehdr header;
     if (read(fd, &header, sizeof(header)) != sizeof(header)) {
         perror("Error reading ELF header");
         close(fd);
-        return (98);
+        return 98;
     }
 
     if (memcmp(header.e_ident, ELFMAG, SELFMAG) != 0) {
         fprintf(stderr, "Error: Not an ELF file\n");
         close(fd);
-        return (98);
+        return 98;
     }
 
     print_elf_header_info(&header);
 
     close(fd);
-    return (0);
+    return 0;
 }
 
